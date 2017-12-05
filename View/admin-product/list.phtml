@@ -27,11 +27,13 @@
             <th>Người đăng</th>
             <th>Danh mục</th>
             <th>Xóa</th>
+            <th>Xem</th>
             </thead>
             <?php
             foreach ($data['data'] as $row) {
             $link        = '?controller=admin-product&action=edit&id=' . $row['id'];
             $link_delete = '?controller=admin-product&action=delete&id=' . $row['id'];
+            $link_view = '?controller=product&action=detail&id=' . $row['id'];
             ?>
             <tbody>
             <tr>
@@ -48,6 +50,7 @@
                 <td><?php echo $row['ten_dang_nhap']; ?></td>
                 <td><?php echo $row['ten_danh_muc']; ?></td>
                 <td><a href="<?php echo $link_delete ?>">Xóa</a></td>
+                <td><a href="<?php echo $link_view ?>">Xem</a></td>
             </tr>
             <?php } ?>
             </tbody>
