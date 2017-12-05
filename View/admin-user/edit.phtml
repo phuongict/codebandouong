@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20">Sửa tài khoản</h4>
+    <?php
+    if (!empty($data['msg'])) {?>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+       <?php foreach ($data['msg'] as $msg) {
+            echo '<b>' . $msg . '</b><br>';
+        }
+        ?>
+    </div>
+        <?php
+    }
+    ?>
+    <form action="" method="post">
+        <div class="form-group">
+            <label for="username">Tên đăng nhập</label>
+        <input class="form-control" disabled type="text" name="txt_ten_dang_nhap" value="<?php echo $data['info']['ten_dang_nhap']; ?>">
+            <label for="password">Mật khẩu</label>
+        <input class="form-control" type="password" name="txt_mat_khau">
+            <label for="password">Xác nhận mật khẩu</label>
+        <input class="form-control" type="password" name="txt_mat_khau_2">
+            <label for="email">Email</label>
+            <input class="form-control" disabled type="email" name="txt_email" value="<?php echo $data['info']['email']; ?>">
+            <label for="text">Nhóm tài khoản</label>
+        <select class="form-control" name="txt_id_nhom_tai_khoan">
+            <option value="0">--- Chọn nhóm tài khoản ---</option>
+            <?php
+            $id_nhom_tai_khoan = $data['info']['id_nhom_tai_khoan'];
+            if (isset($data['list_group'])) {
+                foreach ($data['list_group'] as $row) {
+                    if ($row['id'] == $id_nhom_tai_khoan)
+                        $selected = ' selected ';
+                    else
+                        $selected = '';
+                    echo '<option ' . $selected . ' value="' . $row['id'] . '" >' . $row['ten_nhom'] . '</option>';
+                }
+            }
+            ?>
+            ?>
+        </select>
+    </div>
+               <input type="submit" value="Cập nhật" class="btn btn-info" name="btnSave">
+    </form>
+</div>

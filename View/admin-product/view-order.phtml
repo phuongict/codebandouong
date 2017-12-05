@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20">Chi tiết đơn hàng</h4>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php
+        if (!empty($data['msg'])) {
+//            $tong = count($data['data']);
+            echo '<b>' . $data['msg'] . "</b>";
+        }
+        ?>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+            <th>ID</th>
+            <th>Tên sản phẩm</th>
+            <th>Ngày đặt</th>
+            <th>Trạng thái</th>
+            <th>Ngày cập nhật</th>
+            <th>Thông tin khách hàng</th>
+            <th>Ghi chú</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            </thead>
+            <?php
+            $row = $data['data'];
+            $trangthai ='';
+            if(isset($row['trang_thai'])){
+                if($row['trang_thai'] == 0){
+                    $trangthai = 'Chưa xử lý';
+                }
+                else
+                    if($row['trang_thai'] == 1){
+                        $trangthai = 'Đã xử lý';
+                    }
+                    else
+                        if($row['trang_thai'] == -1){
+                            $trangthai = 'Đã hủy';
+                        }}
+                        ?>
+                <tr>
+                    <td><?php echo $row['id_don_hang']; ?></td>
+                    <td><?php echo $row['ten_san_pham']; ?></td>
+                    <td><?php echo $row['ngay_gio_dat']; ?></td>
+                    <td><?php echo $trangthai; ?></td>
+                    <td><?php echo $row['ngay_cap_nhat']; ?></td>
+                    <td>
+                        <span>Họ tên: <?php echo $row['ho_ten']; ?></span><br>
+                        <span>Địa chỉ: <?php echo $row['dia_chi']; ?></span><br>
+                        <span>Điện thoại: <?php echo $row['dien_thoai']; ?></span><br>
+                        <span>Email: <?php echo $row['email']; ?></span>
+                    </td>
+                    <td><?php echo $row['ghi_chu']; ?></td>
+                    <td><?php echo $row['so_luong']; ?></td>
+                    <td><?php echo $row['don_gia']; ?></td>
+                </tr>
+        </table>
+    </div>
+    <a href="?controller=admin-product&action=list-order">Danh sách đơn hàng</a>
+</div>

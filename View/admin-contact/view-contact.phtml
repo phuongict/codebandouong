@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20">Chi tiết đơn hàng</h4>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php
+        if (!empty($data['msg'])) {
+            $tong = count($data['data']);
+            echo '<b>' . $data['msg'] . "</b>";
+        }
+        ?>
+    </div>
+    <div class="container">
+        <h5 class="padding-title bg-dark text-white" style="margin-bottom:0px;"><?php echo $data['data']['tieu_de']; ?></h5>
+        <div class="row">
+            <div class="col-sm-6" style="text-align:left;"><p style="margin-bottom:0px;padding-left:10px; font-size:14px;">Gửi bởi: <?php echo $data['data']['ho_ten']; ?></p></div>
+            <div class="col-sm-6" style="text-align:right;"><p style="margin-bottom:0px;padding-right:10px; font-size:14px;">Thời gian: <?php echo $data['data']['ngay_gio']; ?></p></div>
+        </div>
+
+        <div class="contact-content bg-light" style="padding: 10px;">
+            <?php echo $data['data']['noi_dung']; ?>
+        </div>
+    </div>
+    <a href="?controller=admin-contact&action=list-contact">Danh sách liên hệ</a>
+</div>

@@ -1,0 +1,26 @@
+<div class="container-fluid">
+
+
+    <div class="alert alert-danger margin-top-20">
+        <strong>Xóa bài viết</strong> <?php $tenbv = isset($data['data']['tieu_de']) ? $data['data']['tieu_de'] : "Không tìm thấy bài viết cần xóa";
+        echo $tenbv;
+        ?>
+    </div>
+    <?php
+    if (!empty($data['msg'])){
+    ?>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php
+        echo '<b>' . $data['msg'] . '</b></div>';
+        }
+        ?>
+        <div class="alert alert-warning">
+            <strong>Bạn có chắc chắn muốn xóa không?</strong>
+            <form action="" method="post" class="form-inline">
+                <div class="form-group"></div>
+                <input type="hidden" name="id_bai_viet" value="<?php echo $data['data']['id']; ?>">
+                <input class="btn btn-info" type="submit" class="btn btn-info" value="Đồng ý xóa" name="btnDelete">
+            </form>
+        </div>
+    </div>

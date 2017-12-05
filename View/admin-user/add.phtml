@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20 margin-bottom-30">Thêm mới tài khoản</h4>
+    <?php
+    if (!empty($data['msg'])) {
+        ?>
+        <div class="alert alert-success alert-dismissable fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php
+            foreach ($data['msg'] as $msg) {
+                echo '<b>' . $msg . "</b><br>";
+            }
+            ?>
+        </div>
+        <?php
+    }
+    ?>
+    <form action="" method="post">
+        <div class="form-group">
+            <label for="text">Tên đăng nhập</label>
+        <input type="text" class="form-control" name="txt_ten_dang_nhap" value="<?php echo isset($_POST['txt_ten_dang_nhap']) ? $_POST['txt_ten_dang_nhap'] : ''; ?>">
+            <label for="password">Mật khẩu</label>
+        <input type="password" class="form-control" name="txt_mat_khau">
+            <label for="password">Xác nhận mật khẩu</label>
+        <input type="password" class="form-control" name="txt_mat_khau_2">
+            <label for="email">Email</label>
+        <input type="email" class="form-control" name="txt_email" value="<?php echo isset($_POST['txt_email']) ? $_POST['txt_email'] : ''; ?>">
+            <label for="text">Nhóm tài khoản</label>
+        <select name="txt_id_nhom_tai_khoan" class="form-control">
+            <option value="0">--- Chọn nhóm tài khoản ---</option>
+            <?php
+            $id_nhom_tai_khoan = isset($_POST['txt_id_nhom_tai_khoan']) ? $_POST['txt_id_nhom_tai_khoan'] : '';
+            if (isset($data['list_group'])) {
+                foreach ($data['list_group'] as $row) {
+                    if ($row['id'] == $id_nhom_tai_khoan)
+                        $selected = ' selected ';
+                    else
+                        $selected = '';
+
+                    echo '<option ' . $selected . ' value="' . $row['id'] . '" >' . $row['ten_nhom'] . '</option>';
+                }
+            }
+            ?>
+            ?>
+        </select>
+        </div>
+        <input type="submit" class="btn btn-info" value="Thêm mới" name="btnSave">
+    </form>
+    <a href="?controller=admin-user&action=list">Danh sách tài khoản</a>
+</div>

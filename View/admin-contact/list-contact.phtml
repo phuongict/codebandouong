@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20">Danh liên hệ</h4>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php
+        if (!empty($data['msg'])) {
+            $tong = count($data['data']);
+            echo '<b>' . $data['msg'] . " ($tong)</b>";
+        }
+        ?>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+            <!--            tieu_de	noi_dung	ho_ten	dia_chi	dien_thoai	email	ngay_gio-->
+            <th>ID</th>
+            <th>Tiêu đề</th>
+            <th>Nội dung</th>
+            <th>Thông tin</th>
+            <th>Ngày gửi</th>
+            <th>Xem</th>
+            <th>Xóa</th>
+            </thead>
+            <?php
+            foreach ($data['data'] as $row) {
+            $link_delete = '?controller=admin-contact&action=delete-contact&id=' . $row['id'];
+            ?>
+            <tbody>
+            <tr>
+                <td><?php echo $row['id']; ?></td>
+                <td><?php echo $row['tieu_de']; ?></td>
+                <td><?php
+                    $count_content = strlen($row['noi_dung']);
+                    if($count_content > 50){
+                        $short_str = substr($row['noi_dung'],0,50);
+                        $short_str .='...';
+                    }
+                    else
+                        $short_str = $row['noi_dung'];
+                    echo $short_str; ?></td>
+                <td>Họ tên: <?php echo $row['ho_ten']; ?><br>
+                    Địa chỉ: <?php echo $row['dia_chi']; ?><br>
+                    Điện thoại: <?php echo $row['dien_thoai']; ?><br>
+                    Email: <?php echo $row['email']; ?>
+                </td>
+                <td><?php echo $row['ngay_gio']; ?></td>
+                <td><a href="<?php echo $link_delete ?>">Xóa</a></td>
+                <td><a href="?controller=admin-contact&action=view-contact&id=<?php echo $row['id']; ?>">Xem</a></td>
+            </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+    if ($data['total_pages'] > 1) {
+        $previous = isset($_GET['page']) ? $_GET['page'] - 1 : 1;
+        $next     = isset($_GET['page']) ? $_GET['page'] + 1 : 2;
+        if (@$_GET['page'] == 1 || !isset($_GET['page'])) {
+            $disabled1 = 'disabled';
+        } else {
+            $disabled1 = '';
+        }
+        if (@$_GET['page'] == $data['total_pages']) {
+            $disabled2 = 'disabled';
+        } else {
+            $disabled2 = '';
+        }
+        ?>
+        <ul class="pagination">
+            <li class="page-item <?php echo $disabled1; ?>"><a class="page-link"
+                                                               href="?controller=admin-contact&action=list-contact&page=<?php echo $previous; ?>"><i
+                        class="fa fa-angle-double-left"></i></a></li>
+            <?php
+            for ($page = 1; $page <= $data['total_pages']; $page++) {
+                if (@$_GET['page'] == $page) {
+                    $active = 'active';
+                } else {
+                    $active = '';
+                }
+                echo '<li class="page-item ' . $active . '"><a class="page-link" href="?controller=admin-contact&action=list-contact&page=' . $page . '">' . $page . '</a></li>';
+            }
+            ?>
+            <li class="page-item <?php echo $disabled2; ?>"><a class="page-link"
+                                                               href="?controller=admin-contact&action=list-contact&page=<?php echo $next; ?>"><i
+                        class="fa fa-angle-double-right"></i></a></li>
+        </ul>
+        <?php
+    }
+    ?>
+</div>

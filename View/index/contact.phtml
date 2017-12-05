@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20 margin-bottom-30">Gửi liên hệ</h4>
+    <?php
+    if (!empty($data['msg'])) {
+        ?>
+        <div class="alert alert-success alert-dismissable fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php
+                echo '<b>' . $data['msg'] . "</b>";
+            ?>
+        </div>
+        <?php
+    }
+    ?>
+    <form action="" method="post">
+        <div class="form-group">
+            <label for="text">Tiêu đề</label>
+            <input type="text" class="form-control" name="txt_tieu_de">
+            <label for="text">Nội dung</label>
+            <textarea name="txt_noi_dung" class="form-control" id="" cols="30" rows="10"></textarea>
+            <label for="text">Họ tên</label>
+            <input type="text" class="form-control" name="txt_ho_ten">
+            <label for="text">Địa chỉ</label>
+            <input type="text" class="form-control" name="txt_dia_chi">
+            <label for="phone">Điện thoại</label>
+            <input type="text" class="form-control" name="txt_dien_thoai">
+            <label for="text">Email</label>
+            <input type="email" class="form-control" name="txt_email">
+        </div>
+        <input type="submit" class="btn btn-info" value="Gửi" name="btnSave">
+    </form>
+</div>

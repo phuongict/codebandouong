@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20">Chỉnh sửa bài viết</h4>
+    <?php
+    if (!empty($data['msg'])) { ?>
+        <div class="alert alert-success alert-dismissable fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php
+            foreach ($data['msg'] as $msg) {
+                echo '<b>' . $msg . "</b>";
+            } ?>
+        </div>
+        <?php
+    }
+    $list_category = $data['data']['list_category'];
+    $article_edit  = $data['data']['article_edit'];
+    ?>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="text">Tiêu đề</label>
+            <input class="form-control" type="text" name="txt_tieu_de"
+                   value="<?php echo $article_edit['tieu_de']; ?>">
+            <label for="text">Nội dung</label>
+            <textarea rows="10" class="form-control" name="txt_noi_dung"><?php echo $article_edit['noi_dung']; ?></textarea>
+            <label for="text">Danh mục bài viết</label>
+            <select class="form-control" name="txt_danh_muc" id="">
+                <option value="<?php echo $article_edit['id_danh_muc']; ?>"><?php echo $article_edit['ten_danh_muc']; ?></option>
+                <?php foreach ($list_category as $value) {
+                    if ($value['id'] == $article_edit['id_danh_muc'])
+                        continue;
+                    ?>
+                    <option value="<?php echo $value['id']; ?>"><?php echo $value['ten_danh_muc']; ?></option>
+                <?php } ?>
+            </select>
+            <label for="text">Ảnh</label>
+            <input class="form-control" type="file" name="txt_hinh_anh">
+        </div>
+        <input type="submit" value="Cập nhật" name="btnSave" class="btn btn-info">
+    </form>
+</div>

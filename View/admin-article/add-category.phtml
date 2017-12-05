@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20 margin-bottom-30">Thêm mới danh mục bài viết</h4>
+    <?php
+    if (!empty($data['msg'])){
+    ?>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php
+        echo '<b>' . $data['msg'] . "</b></div>";
+        }
+        ?>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="text">Tên danh mục</label>
+                <input type="text" name="txt_danh_muc" class="form-control" placeholder="Nhập tên danh mục">
+            </div>
+            <input type="submit" value="Thêm mới" name="btnSave" class="btn btn-primary">
+        </form>
+    </div>

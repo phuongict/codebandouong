@@ -1,0 +1,71 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20">Chỉnh sửa sản phẩm</h4>
+    <?php
+    if (!empty($data['msg'])) { ?>
+        <div class="alert alert-success alert-dismissable fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php
+            foreach ($data['msg'] as $msg) {
+                echo '<b>' . $msg . "</b>";
+            } ?>
+        </div>
+        <?php
+    }
+    $list_hang     = $data['data']['list_hang'];
+    $list_user     = $data['data']['list_user'];
+    $list_category = $data['data']['list_category'];
+    $product_edit  = $data['data']['product_edit'];
+    ?>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="text">Tên sản phẩm</label>
+            <input class="form-control" type="text" name="txt_ten_san_pham"
+                   value="<?php echo $product_edit['ten_san_pham']; ?>">
+            <label for="text">Mô tả</label>
+            <textarea class="form-control" name="txt_mo_ta"><?php echo $product_edit['mo_ta']; ?></textarea>
+            <label for="text">Màu sắc</label>
+            <input class="form-control" type="text" name="txt_loai" value="<?php echo $product_edit['loai']; ?>">
+            <label for="text">Giá</label>
+            <input class="form-control" type="text" name="txt_gia" value="<?php echo $product_edit['gia']; ?>">
+            <label for="text">Giảm giá</label>
+            <input class="form-control" type="text" name="txt_giam_gia"
+                   value="<?php echo $product_edit['giam_gia']; ?>">
+            <label for="text">Thành phần</label>
+            <textarea class="form-control"
+                      name="txt_ky_thuat"><?php echo $product_edit['thanh_phan']; ?></textarea>
+            <label for="text">Hãng sản xuất</label>
+            <select class="form-control" name="txt_hang_san_xuat" id="">
+                <option value="<?php echo $product_edit['id_hang_sx']; ?>"><?php echo $product_edit['ten_hang']; ?></option>
+                <?php foreach ($list_hang as $value) {
+                    if ($value['id'] == $product_edit['id_hang_sx'])
+                        continue;
+                    ?>
+                    <option value="<?php echo $value['id']; ?>"><?php echo $value['ten_hang']; ?></option>
+                <?php } ?>
+            </select>
+            <label for="text">Ảnh</label>
+            <input class="form-control" type="file" name="txt_hinh_anh">
+<!--            <label for="text">ID User</label>-->
+<!--            <select class="form-control" name="txt_user" id="">-->
+<!--                <option value="--><?php //echo $product_edit['id_tai_khoan']; ?><!--">--><?php //echo $product_edit['ten_dang_nhap']; ?><!--</option>-->
+<!--                --><?php //foreach ($list_user as $value) {
+//                    if ($value['id'] == $product_edit['id_tai_khoan'])
+//                        continue;
+//                    ?>
+<!--                    <option value="--><?php //echo $value['id']; ?><!--">--><?php //echo $value['ten_dang_nhap']; ?><!--</option>-->
+<!--                --><?php //} ?>
+<!--            </select>-->
+            <label for="text">Danh mục</label>
+            <select class="form-control" name="txt_danh_muc" id="">
+                <option value="<?php echo $product_edit['id_danh_muc']; ?>"><?php echo $product_edit['ten_danh_muc']; ?></option>
+                <?php foreach ($list_category as $value) {
+                    if ($value['id'] == $product_edit['id_danh_muc'])
+                        continue;
+                    ?>
+                    <option value="<?php echo $value['id']; ?>"><?php echo $value['ten_danh_muc']; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <input type="submit" value="Cập nhật" name="btnSave" class="btn btn-info">
+    </form>
+</div>

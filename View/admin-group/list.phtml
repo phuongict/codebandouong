@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20">Danh sách nhóm tài khoản</h4>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php
+        if (!empty($data['msg'])) {
+            $tong = count($data['data']);
+            echo '<b>' . $data['msg'] . " <strong>($tong)</strong></b>";
+        }
+        ?>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+            <th>ID</th>
+            <th>Tên nhóm</th>
+            <th>Phân quyền</th>
+            <th>Xóa</th>
+            </thead>
+            <?php
+            foreach ($data['data'] as $row) {
+                $link = '?controller=admin-group&action=edit&id=' . $row['id'];
+                $link_delete = '?controller=admin-group&action=delete&id=' . $row['id'];
+                $link_permission = '?controller=admin-group&action=edit-permission&id=' . $row['id'];
+                echo '<tr><td>' . $row['id'] . '</td><td><a href="' . $link . '">' . $row['ten_nhom'] . '</a></td><td><a href="' . $link_permission . '">Phân quyền</a> </td><td><a href="' . $link_delete . '">Xóa</a> </td></tr>';
+            }
+            ?>
+        </table>
+    </div>
+    <?php
+    if ($data['total_pages'] > 1) {
+        $previous = isset($_GET['page'])?$_GET['page']-1:1;
+        $next = isset($_GET['page'])?$_GET['page']+1:2;
+        if(@$_GET['page']==1 || !isset($_GET['page'])){
+            $disabled1 = 'disabled';
+        }
+        else{
+            $disabled1 = '';
+        }
+        if(@$_GET['page']==$data['total_pages']){
+            $disabled2 = 'disabled';
+        }
+        else{
+            $disabled2 = '';
+        }
+        ?>
+            <ul class="pagination">
+                <li class="page-item <?php echo $disabled1;?>"><a class="page-link" href="?controller=admin-group&action=list&page=<?php echo $previous;?>"><i class="fa fa-angle-double-left"></i></a></li>
+                <?php
+                for ($page = 1; $page <= $data['total_pages']; $page++) {
+                    if(@$_GET['page']==$page){
+                        $active = 'active';
+                    }
+                    else{
+                        $active = '';
+                    }
+                    echo '<li class="page-item '.$active.'"><a class="page-link" href="?controller=admin-group&action=list&page=' . $page . '">' . $page . '</a></li>';
+                }
+                ?>
+                <li class="page-item <?php echo $disabled2;?>"><a class="page-link" href="?controller=admin-group&action=list&page=<?php echo $next; ?>"><i class="fa fa-angle-double-right"></i></a></li>
+            </ul>
+        <?php
+    }
+    ?>
+    <a href="?controller=admin-group&action=add">Thêm nhóm mới</a>
+</div>

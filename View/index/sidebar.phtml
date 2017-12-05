@@ -1,0 +1,36 @@
+<h6 class="bg-info padding-title text-white">Thông tin tài khoản</h6>
+<ul class="nav flex-column bg-light">
+    <?php if (isset($_SESSION['userLogin'])) { ?>
+        <li class="nav-item">
+        <span class="nav-link"> Tài khoản: <?php echo $_SESSION['userLogin']['ten_dang_nhap']; ?> |
+            <a href="?controller=index&action=logout">Thoát</a>
+        </span>
+        </li>
+        <li class="nav-item">
+            <span class="nav-link">Email: <a href="#"
+                                             class="text-info"><?php echo $_SESSION['userLogin']['email']; ?></a></span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="?controller=admin-group&action=index">Quản trị</a>
+        </li>
+    <?php } else {
+        echo '<li class="nav-item"><span class="nav-link text-danger"> Hãy đăng nhập để sử dụng nhiều chức năng hơn</span></li>';
+    }
+    ?>
+</ul>
+<h6 class="bg-info padding-title text-white margin-top-20">Danh mục sản phẩm</h6>
+<ul class="nav flex-column">
+    <?php foreach($data['data']['list_category'] as $value){?>
+        <li class="nav-item bg-light" style="border-bottom:1px dashed #ffffff">
+            <a class="nav-link" href="?controller=product&action=list-product-category&id=<?php echo $value['id']; ?>"><?php echo $value['ten_danh_muc'];?></a>
+        </li>
+    <?php } ?>
+</ul>
+<h6 class="bg-info padding-title text-white margin-top-20">Hãng sản xuất</h6>
+<ul class="nav flex-column">
+    <?php foreach($data['data']['list_producer'] as $value){?>
+        <li class="nav-item bg-light" style="border-bottom:1px dashed #ffffff">
+            <a class="nav-link" href="?controller=product&action=list-product-producer&id=<?php echo $value['id']; ?>"><?php echo $value['ten_hang'];?></a>
+        </li>
+    <?php } ?>
+</ul>

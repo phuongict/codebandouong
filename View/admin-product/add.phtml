@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20 margin-bottom-30">Thêm sản phẩm</h4>
+    <?php
+    if (!empty($data['msg'])) {
+        ?>
+        <div class="alert alert-success alert-dismissable fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php
+            foreach ($data['msg'] as $msg) {
+                echo '<b>' . $msg . "</b>";
+            }
+            ?>
+        </div>
+        <?php
+    }
+    ?>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="text">Tên sản phẩm</label>
+        <input class="form-control" type="text" name="txt_ten_san_pham">
+            <label for="text">Mô tả</label>
+        <textarea class="form-control" name="txt_mo_ta"></textarea>
+            <label for="text">Loại</label>
+        <input class="form-control" type="text" name="txt_loai">
+            <label for="text">Giá</label>
+        <input class="form-control" type="text" name="txt_gia">
+            <label for="text">Giảm giá</label>
+        <input class="form-control" type="text" name="txt_giam_gia">
+            <label for="text">Thành phần</label>
+        <textarea class="form-control" name="txt_thanh_phan"></textarea>
+            <label for="text">ID Hãng SX</label>
+        <select class="form-control" name="txt_hang_san_xuat" id="">
+                        <option value="0">--Hãng sản xuất--</option>
+                        <?php foreach ($data['list_hang_sx'] as $value) { ?>
+                            <option value="<?php echo $value['id']; ?>"><?php echo $value['ten_hang']; ?></option>
+                        <?php } ?>
+                    </select>
+
+            <label for="text">Ảnh</label>
+        <input class="form-control" type="file" name="txt_hinh_anh">
+<!--            <label for="text">ID User</label>-->
+<!--        <select class="form-control" name="txt_user" id="">-->
+<!--                        <option value="0">--Tài khoản--</option>-->
+<!--                        --><?php //foreach ($data['list_user'] as $value) { ?>
+<!--                            <option value="--><?php //echo $value['id']; ?><!--">--><?php //echo $value['ten_dang_nhap']; ?><!--</option>-->
+<!--                        --><?php //} ?>
+<!--                    </select>-->
+            <label for="text">ID Danh mục</label>
+        <select class="form-control" name="txt_danh_muc" id="">
+            <option value="0">--Danh mục--</option>
+            <?php foreach ($data['list_category'] as $value) { ?>
+                <option value="<?php echo $value['id']; ?>"><?php echo $value['ten_danh_muc']; ?></option>
+            <?php } ?>
+        </select>
+        </div>
+        <input type="submit" value="Thêm mới" class="btn btn-info" name="btnSave">
+    </form>
+</div>

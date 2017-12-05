@@ -1,0 +1,23 @@
+<?php
+if (!empty($data['msg'])) {
+    ?>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php
+            echo '<b>' . $data['msg'] . "</b><br>";
+            ?>
+    </div>
+        <input type="submit" class="btn btn-info" name="btnSend" onclick="window.location.href='?controller=product&action=view-cart'" value="Thanh toán">
+        <input type="button" class="btn btn-info" value="Tiếp tục mua hàng"
+               onclick="Redirect()">
+        <?php
+            echo "<script type='text/javascript'>
+                                function Redirect() {
+                                    history.back(-1)
+                                }
+//                                setTimeout('Redirect()', 1000);
+                        </script>";
+        ?>
+    <?php
+}
+?>

@@ -1,0 +1,81 @@
+<?php
+$tong = count(@$data['data']);
+?>
+<div class="jumbotron">Có <strong class="text-danger"> <?php echo $tong;?></strong> kết quả tìm kiếm cho : <?php echo @$_GET['result'];?></div>
+<?php
+if(!empty($data['msg'])){?>
+    <div class="alert alert-danger alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php echo $data['msg']; ?>
+    </div>
+    <?php
+}?>
+<div class="row">
+    <?php
+            if(!empty($data['data'])){
+            foreach ($data['data'] as $value) {
+                $link_add_cart = '?controller=product&action=add-cart&item='.$value['id'];
+                ?>
+                <div class="col-xl-3 col-lg-4 col-6">
+                    <div class="margin-bottom-30" style="border: 1px solid #f2f2f2;padding:5px;text-align: center;">
+                        <div class="img-product">
+                            <a href="?controller=product&action=detail&id=<?php echo $value['id']; ?>"><img src=".<?php echo _app_path_images_public . '/images-product/' . $value['hinh_anh']; ?>"></a>
+                        </div>
+                        <h6><a href="?controller=product&action=detail&id=<?php echo $value['id']; ?>"><?php echo $value['ten_san_pham']; ?></a></h6>
+                        <?php
+                        $line_through = '';
+                        if (!empty($value['giam_gia'])) {
+                            $line_through = 'text-decoration: line-through;';
+                        }
+                        ?>
+                        <span class="text-danger"
+                              style="<?php echo $line_through; ?>"><?php echo number_format($value['gia']); ?></span>&nbsp;
+                        <?php if (!empty($value['giam_gia'])) { ?>
+                            <span class="text-danger"><?php echo number_format($value['giam_gia']); ?></span>
+                        <?php } ?>
+                        <div class="buy-item">
+                            <button type="button" class="btn btn-info"><a href="<?php echo $link_add_cart ?>" class="text-white">Thêm vào giỏ hàng</a></button>
+                        </div>
+                    </div>
+                </div>
+
+            <?php }}
+            ?>
+<div class="clearfix"></div>
+</div>
+<?php
+if (@$data['total_pages'] > 1) {
+    $previous = isset($_GET['page']) ? $_GET['page'] - 1 : 1;
+    $next     = isset($_GET['page']) ? $_GET['page'] + 1 : 2;
+    if (@$_GET['page'] == 1 || !isset($_GET['page'])) {
+        $disabled1 = 'disabled';
+    } else {
+        $disabled1 = '';
+    }
+    if (@$_GET['page'] == $data['total_pages']) {
+        $disabled2 = 'disabled';
+    } else {
+        $disabled2 = '';
+    }
+    ?>
+    <ul class="pagination">
+        <li class="page-item <?php echo $disabled1; ?>"><a class="page-link"
+                                                           href="?controller=index&action=search&result=<?php echo @$_GET['result']; ?>&page=<?php echo $previous; ?>"><i
+                    class="fa fa-angle-double-left"></i></a></li>
+        <?php
+        for ($page = 1; $page <= $data['total_pages']; $page++) {
+            if (@$_GET['page'] == $page) {
+                $active = 'active';
+            } else {
+                $active = '';
+            }
+            echo '<li class="page-item ' . $active . '"><a class="page-link" href="?controller=index&action=search&result='.@$_GET['result'].'&page=' . $page . '">' . $page . '</a></li>';
+        }
+        ?>
+        <li class="page-item <?php echo $disabled2; ?>"><a class="page-link"
+                                                           href="?controller=index&action=search&result=<?php echo @$_GET['result']; ?>&page=<?php echo $next; ?>"><i
+                    class="fa fa-angle-double-right"></i></a></li>
+    </ul>
+    <?php
+}
+?>

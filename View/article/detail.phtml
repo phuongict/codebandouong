@@ -1,0 +1,25 @@
+<?php
+$article = $data['data']['detail_article'];?>
+<div class="row">
+    <div class="col-md-9" >
+        <ul class="breadcrumb" style="border-radius: 0!important;">
+            <li class="breadcrumb-item"><a href="index.php">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="?controller=article&action=list-article-category&id=<?php echo $article['id_danh_muc']; ?>"><?php echo $article['ten_danh_muc']; ?></a></li>
+            <li class="breadcrumb-item active"><?php echo $article['tieu_de']; ?></li>
+        </ul>
+        <h5 class="bg-info text-white padding-title"><?php echo $article['tieu_de']; ?></h5>
+        <div class="container-fluid">
+                <div style="text-align:center;">
+                <?php if(isset($article['hinh_anh'])){ ?>
+                <img class="img-fluid" style="max-height:300px;" src=".<?php  echo  _app_path_images_public . '/images-article/' . $article['hinh_anh']; ?>">
+                <?php } ?>
+                </div>
+            <div class="margin-top-20" style="line-height:25px;">
+                <?php echo $article['noi_dung']; ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <?php require_once app_path . '/View/index/sidebar.phtml'; ?>
+    </div>
+</div>

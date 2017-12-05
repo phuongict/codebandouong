@@ -1,0 +1,28 @@
+<div id="demo" class="carousel slide margin-bottom-20" data-ride="carousel">
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <?php
+        foreach($data['data']['list_slide'] as $value){?>
+        <li data-target="#demo" data-slide-to="<?php echo $value['id'];?>"></li>
+        <?php }?>
+    </ul>
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src=".<?php echo _app_path_images_public . '/images-slide/'.$data['data']['list_slide'][0]['hinh_anh'];?>" alt="Los Angeles" width="100%" height="300">
+        </div>
+        <?php foreach($data['data']['list_slide'] as $key => $value){ if($key==0) continue; ?>
+        <div class="carousel-item">
+            <img src=".<?php echo _app_path_images_public . '/images-slide/'.$value['hinh_anh']?>" alt="Chicago" width="100%" height="300">
+        </div>
+        <?php } ?>
+    </div>
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>

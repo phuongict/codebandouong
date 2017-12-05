@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20">Sửa hãng sản xuất</h4>
+    <?php
+    if (!empty($data['msg'])) {
+        ?>
+        <div class="alert alert-success alert-dismissable fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php
+            foreach ($data['msg'] as $item_msg) {
+                echo '<b>' . $item_msg . "</b>";
+            }
+            ?>
+        </div>
+        <?php
+    }
+    if (isset($data['data'])) {
+        ?>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="text">Tên hãng sản xuất</label>
+                <input type="text" class="form-control" name="txt_hang"
+                       value="<?php echo $data['data']['ten_hang']; ?>">
+            </div>
+            <input type="submit" class="btn btn-info" value="Sửa hãng sx" name="btnSave">
+        </form>
+
+        <?php
+    }
+    ?>
+</div>

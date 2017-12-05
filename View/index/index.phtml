@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-md-9">
+        <?php
+        require_once app_path . '/View/index/slide.phtml'; ?>
+        <h6 class="bg-info text-white padding-title" id="sanpham">Sản phẩm mới</h6>
+        <div class="row">
+            <?php
+            foreach ($data['data']['list_product'] as $value) {
+                $link_add_cart = '?controller=product&action=add-cart&item='.$value['id'];
+                ?>
+                <div class="col-xl-3 col-lg-4 col-6">
+                    <div class="margin-bottom-30" style="border: 1px solid #f2f2f2;padding:5px;text-align: center;">
+                        <div class="img-product">
+                            <a href="?controller=product&action=detail&id=<?php echo $value['id']; ?>"><img src=".<?php echo _app_path_images_public . '/images-product/' . $value['hinh_anh']; ?>"></a>
+                        </div>
+                        <h6><a href="?controller=product&action=detail&id=<?php echo $value['id']; ?>"><?php echo $value['ten_san_pham']; ?></a></h6>
+                        <?php
+                        $line_through = '';
+                        if (!empty($value['giam_gia'])) {
+                            $line_through = 'text-decoration: line-through;';
+                        }
+                        ?>
+                        <span class="text-danger"
+                              style="<?php echo $line_through; ?>"><?php echo number_format($value['gia']); ?></span>&nbsp;
+                        <?php if (!empty($value['giam_gia'])) { ?>
+                            <span class="text-danger"><?php echo number_format($value['giam_gia']); ?></span>
+                        <?php } ?>
+
+                            <a class="buy-item" href="<?php echo $link_add_cart ?>" class="text-white">Thêm vào giỏ hàng</a>
+
+                    </div>
+                </div>
+
+            <?php }
+            ?>
+            <div class="clearfix"></div>
+        </div>
+        <?php require_once app_path . '/View/index/pagination.phtml'; ?>
+    </div>
+    <div class="col-md-3">
+        <?php require_once app_path . '/View/index/sidebar.phtml'; ?>
+    </div>
+</div>
+    <!--post new-->
+    <h6 class="bg-info text-white padding-title">Bài viết mới</h6>
+    <div class="row">
+        <?php
+        foreach ($data['data']['list_article'] as $value) {
+            ?>
+            <div class="col-xl-3 col-lg-4 col-6">
+                <div class="margin-bottom-30" style="border: 1px solid #f2f2f2;padding:5px;text-align: center;">
+                    <div class="img-product">
+                        <a href="?controller=article&action=detail&id=<?php echo $value['id']; ?>"><img src=".<?php echo _app_path_images_public . '/images-article/' . $value['hinh_anh']; ?>"></a>
+                    </div>
+                    <?php if(strlen($value['tieu_de'])>40 || strlen($value['noi_dung'])>25){
+                        $cut_title = substr($value['tieu_de'],0,40).'...';
+                        $cut_content = substr($value['noi_dung'],0,25).'...';
+                    }
+                    else{
+                        $cut_title = $value['tieu_de'];
+                        $cut_content = $value['noi_dung'];
+                    }?>
+                    <div class="wrap-content-post">
+                    <h6><a href="?controller=article&action=detail&id=<?php echo $value['id']; ?>"><?php echo $cut_title; ?></a></h6>
+                    <p style="color:#888;font-size: 13px;"><?php echo $cut_content; ?></p></div>
+                    <div class="buy-item"><a class="text-white" href="?controller=article&action=detail&id=<?php echo $value['id']; ?>">Xem thêm...</a>
+                    </div>
+                </div>
+            </div>
+
+        <?php }
+        ?>
+        <div class="clearfix"></div>
+    </div>
+

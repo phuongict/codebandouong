@@ -1,0 +1,34 @@
+<?php $product = $data['data']['detail_product'];
+?>
+        <div class="row">
+            <div class="col-md-9" >
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="img-detail-product">
+                            <img src=".<?php echo _app_path_images_public . '/images-product/' . $product['hinh_anh']; ?>">
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <h6 class="bg-info text-white padding-title"><?php echo $product['ten_san_pham']; ?></h6>
+                        <div class="container-fluid">
+                            <p><?php echo $product['thanh_phan']; ?></p>
+                            <p>Loại: <?php echo $product['loai']; ?></p>
+                            <p>Hãng sản xuất: <a href="?controller=product&action=list-product-producer&id=<?php echo $product['id_hang_sx']; ?>"><?php echo $product['ten_hang']; ?></a></p>
+                            <p>Danh mục: <a href="?controller=product&action=list-product-category&id=<?php echo $product['id_danh_muc']; ?>"><?php echo $product['ten_danh_muc']; ?></a></p>
+                            <p>Giá gốc: <?php echo $product['gia']; ?></p>
+                            <p><?php if(!empty($product['giam_gia'])){ echo 'Giảm còn: '.$product['giam_gia'];} ?></p>
+                            <div class="buy-item" style="text-align:center;border-radius: 5px; max-width: 200px;margin:0 auto;">
+                                <a class="text-white" href="?controller=product&action=add-cart&item=<?php echo $product['id'];?>">Thêm vào giỏ hàng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h6 class="bg-info text-white padding-title margin-top-20">Mô tả sản phẩm</h6>
+                <div class="container-fluid">
+                    <p><?php echo $product['mo_ta']; ?></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <?php require_once app_path . '/View/index/sidebar.phtml'; ?>
+            </div>
+        </div>

@@ -1,0 +1,77 @@
+<?php
+if (isset($data['msg'])){
+?>
+<div class="alert alert-success alert-dismissable fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <?php
+    foreach ($data['msg'] as $msg) {
+        echo "<strong>$msg</strong></br>";
+    }
+    echo "</div>";
+    }
+    ?>
+    <span id="_error_info"></span>
+    <?php if(@$data['_flag'] !== true){ ?>
+<div class="row">
+
+    <div class="col-sm-8">
+            <h5 class="bg-info text-white padding-title">Thông tin khách hàng</h5>
+            <form action="" method="post" id="form_order">
+                <lable for="name">Họ tên</lable>
+                <input class="form-control" id="_user_order" type="text" name="txt_username">
+                <lable for="address">Địa chỉ</lable>
+                <input class="form-control" id="_address_order" type="text" name="txt_address">
+                <lable for="tel">Điện thoại</lable>
+                <input class="form-control" id="_phone_order" type="text" name="txt_phone">
+                <lable for="email">Email</lable>
+                <input class="form-control" id="_email_order" type="text" name="txt_email">
+                <lable for="text">Ghi chú</lable>
+                <textarea class="form-control" name="txt_ghichu" id="" cols="30" rows="5"></textarea>
+                <div class="margin-top-20"></div>
+                <input type="submit" class="btn btn-info" id="btn_checkout" name="btnSend" value="Gửi đơn hàng">
+                <input type="button" class="btn btn-info" value="Quay lại giỏ hàng"
+                       onclick="window.location.href='?controller=product&action=view-cart'">
+            </form>
+        </div>
+        <div class="col-sm-4">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th colspan="2">Sản phẩm</th>
+                    </tr>
+                    </thead>
+                    <?php
+                    $total = 0;
+                    foreach ($data['data'] as $row) {
+                        $img  = '.' . _app_path_images_public . '/images-product/' . $row['hinh_anh'];
+                        $id   = $row['id'];
+                        $name = $row['ten_san_pham'];
+                        if (!empty($row['giam_gia'])) {
+                            $price = $row['giam_gia'];
+                        } else {
+                            $price = $row['gia'];
+                        }
+                        $qt     = @$_SESSION['cart'][$id];
+                        $amount = $price * $qt;
+                        $total  += $amount;
+
+                        $amount      = number_format($amount);
+                        $link_delete = '?controller=product&action=delete&item=' . $row['id'];
+                        echo "<tr>
+                            <td><img style='width:30px' src='$img'></td>
+                            <td>$name</td>
+                        </tr>";
+                    }
+                    ?>
+
+                    <tr>
+                        <td>Tổng tiền:</td>
+                        <td class="text-danger"><?php echo number_format($total); ?></td>
+                    </tr>
+
+                </table>
+                <br>
+            </div>
+        </div>
+    </div><?php } ?>

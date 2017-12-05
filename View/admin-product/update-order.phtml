@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <h4 class="margin-top-20">Sửa trạng thái đơn hàng</h4>
+    <?php
+    if (!empty($data['msg'])) {
+        ?>
+        <div class="alert alert-success alert-dismissable fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php
+            foreach ($data['msg'] as $item_msg) {
+                echo '<b>' . $item_msg . "</b>";
+            }
+            ?>
+        </div>
+        <?php
+    }
+    if (isset($data['data'])) {
+        if($data['data']['trang_thai'] == 0){
+            $trangthai = 'Chưa xử lý';
+        }
+        else
+            if($data['data']['trang_thai'] == 1){
+                $trangthai = 'Đã xử lý';
+            }
+            else
+                $trangthai = 'Đã hủy';
+        $trangthai_array = array('1','-1','0');
+        ?>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="text">Trạng thái</label>
+                <select name="txt_trang_thai" id="">
+                    <option value="<?php echo $data['data']['trang_thai']; ?>"><?php echo $trangthai; ?></option>
+                    <?php foreach($trangthai_array as $value){
+                        if($value == $data['data']['trang_thai']){
+                            continue;
+                        }
+                        if($value == 0){
+                            $trangthai = 'Chưa xử lý';
+                        }
+                        else
+                            if($value == 1){
+                                $trangthai = 'Đã xử lý';
+                            }
+                            else
+                                $trangthai = 'Đã hủy';
+                    ?>
+                    <option value="<?php echo $value;?>"><?php echo $trangthai;?> </option>
+                    <?php } ?>
+                </select>
+            </div>
+            <input type="submit" class="btn btn-info" value="Sửa trạng thái" name="btnSave">
+        </form>
+        <?php
+    }
+    ?>
+</div>

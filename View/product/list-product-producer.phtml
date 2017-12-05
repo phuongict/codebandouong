@@ -1,0 +1,48 @@
+<?php
+
+
+$sanpham = @$data['data']['list_product_producer'];
+echo @$data['msg'];
+?>
+<div class="row">
+    <div class="col-md-9">
+        <h6 class="bg-info text-white padding-title"><?php echo $sanpham['0']['ten_hang']; ?></h6>
+        <div class="row">
+            <?php
+            if(isset($sanpham)){
+                foreach ($sanpham as $value) {
+                    $link_add_cart = '?controller=product&action=add-cart&item='.$value['id'];
+                    ?>
+                    <div class="col-xl-3 col-lg-4 col-6">
+                        <div class="margin-bottom-30" style="border: 1px solid #f2f2f2;padding:5px;text-align: center;">
+                            <div class="img-product">
+                                <a href="?controller=product&action=detail&id=<?php echo $value['id']; ?>"><img src=".<?php echo _app_path_images_public . '/images-product/' . $value['hinh_anh']; ?>"></a>
+                            </div>
+                            <h6><a href="?controller=product&action=detail&id=<?php echo $value['id']; ?>"><?php echo $value['ten_san_pham']; ?></a></h6>
+                            <?php
+                            $line_through = '';
+                            if (!empty($value['giam_gia'])) {
+                                $line_through = 'text-decoration: line-through;';
+                            }
+                            ?>
+                            <span class="text-danger"
+                                  style="<?php echo $line_through; ?>"><?php echo number_format($value['gia']); ?></span>&nbsp;
+                            <?php if (!empty($value['giam_gia'])) { ?>
+                                <span class="text-danger"><?php echo number_format($value['giam_gia']); ?></span>
+                            <?php } ?>
+                            <div class="buy-item">
+                                <a href="<?php echo $link_add_cart;?>" class="text-white">Thêm vào giỏ hàng</a>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php }}
+            ?>
+            <div class="clearfix"></div>
+        </div>
+        <?php require_once app_path . '/View/index/pagination.phtml'; ?>
+    </div>
+    <div class="col-md-3">
+        <?php require_once app_path . '/View/index/sidebar.phtml'; ?>
+    </div>
+</div>

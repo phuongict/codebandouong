@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="alert alert-danger margin-top-20">
+        <strong>Xóa sản
+            phẩm</strong> <?php $tensp = isset($data['data']['ten_san_pham']) ? $data['data']['ten_san_pham'] : "Không tìm thấy sản phẩm cần xóa";
+        echo $tensp;
+        ?>
+    </div>
+    <?php
+    if (!empty($data['msg'])){
+    ?>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php
+        echo '<b>' . $data['msg'] . '</b></div>';
+        }
+        ?>
+        <div class="alert alert-warning">
+            <strong>Bạn có chắc chắn muốn xóa không?</strong>
+            <form action="" method="post" class="form-inline">
+                <div class="form-group"></div>
+                <input type="hidden" name="id_san_pham" value="<?php echo $data['data']['id']; ?>">
+                <input class="btn btn-info" type="submit" class="btn btn-info" value="Đồng ý xóa" name="btnDelete">
+            </form>
+        </div>
+    </div>

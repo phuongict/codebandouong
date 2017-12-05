@@ -1,0 +1,66 @@
+
+
+
+<h4>Giỏ hàng của bạn</h4>
+<?php if(isset($data['data'])){ ?>
+<form action="" method="post">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+        <tr>
+            <th>STT</th>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
+            <th>Xóa</th>
+        </tr>
+            </thead>
+        <?php
+        $total = 0;
+        $stt = 0;
+        foreach ($data['data'] as $row) {
+            $stt ++;
+            $img = '.'._app_path_images_public . '/images-product/' . $row['hinh_anh'];
+            $id = $row['id'];
+            $name = $row['ten_san_pham'];
+            if(!empty($row['giam_gia'])){
+                $price = $row['giam_gia'];
+            }
+            else{
+                $price = $row['gia'];
+            }
+            $qt = $_SESSION['cart'][$id];
+            $amount = $price * $qt;
+            $total += $amount;
+
+            $amount = number_format($amount);
+            $link_delete = '?controller=product&action=delete&item='.$row['id'];
+            echo "<tr>
+                            <td>$stt</td>
+                            <td><img style='width:30px' src='$img'>$name</td>
+                            <td><input type='number' value='$qt' name='qt_$id' /></td>
+                            <td>$price</td>
+                            <td>$amount</td>
+                            <td><a href='$link_delete'>Xóa</a></td>
+                        </tr>";
+        }
+
+        ?>
+
+        <tr>
+            <th colspan="5">Tổng tiền</th>
+            <th class="text-danger"><?php echo number_format($total); ?></th>
+        </tr>
+
+    </table><br>
+    <input type="submit" class="btn btn-info" name="btnUpdate" value="Cập nhật giỏ hàng"/>
+    <input type="button" class="btn btn-info" value="Gửi đơn hàng" onclick="window.location.href='?controller=product&action=order'">
+    <input type="button" class="btn btn-info" value="Tiếp tục mua hàng" onclick="window.location.href='index.php'">
+    </div>
+</form>
+<?php }
+else{
+    echo "<div class=\"alert alert-danger alert-dismissable fade show\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Giỏ hàng trống!</div>";
+}?>

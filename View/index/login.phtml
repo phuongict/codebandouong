@@ -1,0 +1,44 @@
+<div class="container">
+    <?php
+    if (!empty($data['msg'])) {
+    ?>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php
+        foreach ($data['msg'] as $item_msg) {
+            echo '<b>' . $item_msg . "</b>";
+        }
+        ?>
+    </div>
+    <?php }
+    if(!isset($_SESSION['userLogin'])){
+    ?>
+    <form action="" method="post">
+        <table align="center" class="margin-top-20 form-login">
+            <tr>
+                <td><label for="username">Tên đăng nhập:</label></td>
+                <td><input type="text" name="txt_tai_khoan" id="email" placeholder="Nhập tên đăng nhập..."></td>
+            </tr>
+            <tr>
+                <td><label for="pwd">Mật khẩu:</label></td>
+                <td><input type="password" name="txt_mat_khau" id="pwd" placeholder="Nhập mật khẩu...">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="txt_remember_pass" type="checkbox"> Nhớ mật khẩu?
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" name="btnSave" value="Đăng nhập" class="btn btn-info"/></td>
+            </tr>
+        </table>
+    </form>
+    <?php } ?>
+</div>

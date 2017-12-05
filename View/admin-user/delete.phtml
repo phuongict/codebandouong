@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="alert alert-danger margin-top-20">
+        <strong>Xóa tài khoản</strong> <?php if (!empty($data['data']['ten_dang_nhap'])) {
+            echo $data['data']['ten_dang_nhap'];
+        } else echo "Không tồn tại tài khoản!"; ?>
+    </div>
+    <?php
+    if (!empty($data['msg'])){
+    ?>
+    <div class="alert alert-success alert-dismissable fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php
+        echo '<b>' . $data['msg'] . '</b></div>';
+        }
+        ?>
+        <div class="alert alert-warning">
+            <strong>Bạn có chắc chắn muốn xóa không?</strong>
+            <form action="" method="post" class="form-inline">
+                <div class="form-group"></div>
+                <input type="hidden" name="id_user" value="<?php echo $data['data']['id']; ?>">
+                <input class="btn btn-info" type="submit" value="Đồng ý xóa" name="btnDelete">
+            </form>
+        </div>
+    </div>

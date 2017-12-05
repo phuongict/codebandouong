@@ -1,0 +1,42 @@
+<?php
+$baiviet = @$data['data']['list_article_category'];
+echo @$data['msg'];
+?>
+<div class="row">
+    <div class="col-md-9">
+        <h6 class="bg-info text-white padding-title">Danh mục: <?php echo $baiviet['0']['ten_danh_muc']; ?></h6>
+        <div class="row">
+            <?php
+            foreach ($data['data']['list_article_category'] as $value) {
+                ?>
+                <div class="col-xl-3 col-lg-4 col-6">
+                    <div class="margin-bottom-30" style="border: 1px solid #f2f2f2;padding:5px;text-align: center;">
+                        <div class="img-product">
+                            <a href="?controller=article&action=detail&id=<?php echo $value['id']; ?>"><img src=".<?php echo _app_path_images_public . '/images-article/' . $value['hinh_anh']; ?>"></a>
+                        </div>
+                        <?php if(strlen($value['tieu_de'])>40 || strlen($value['noi_dung'])>25){
+                            $cut_title = substr($value['tieu_de'],0,40).'...';
+                            $cut_content = substr($value['noi_dung'],0,25).'...';
+                        }
+                        else{
+                            $cut_title = $value['tieu_de'];
+                            $cut_content = $value['noi_dung'];
+                        }?>
+                        <h6><a href="?controller=article&action=detail&id=<?php echo $value['id']; ?>"><?php echo $cut_title; ?></a></h6>
+                        <p style="color:#888;font-size: 13px;"><?php echo $cut_content; ?></p>
+                        <div class="buy-item">
+                            <button type="button" class="btn btn-info"><a class="text-white" href="?controller=article&action=detail&id=<?php echo $value['id']; ?>">Xem thêm...</a></button>
+                        </div>
+                    </div>
+                </div>
+
+            <?php }
+            ?>
+            <div class="clearfix"></div>
+        </div>
+        <?php require_once app_path . '/View/index/pagination.phtml'; ?>
+    </div>
+    <div class="col-md-3">
+        <?php require_once app_path . '/View/index/sidebar.phtml'; ?>
+    </div>
+</div>
